@@ -2,6 +2,7 @@ class DirectionController < ApplicationController
   include Api
 
   def show
+    # byebug
     maps_response = googleMaps(params[:origin], params[:destination], params[:departure_time])
     # maps_response is an obj with key duration with text value
     # {
@@ -29,6 +30,17 @@ class DirectionController < ApplicationController
     my_response["dest_icon"] = dest_weather["hourly"]["data"][0]["icon"]
 
     my_response["dest_summary"] = dest_weather["hourly"]["data"][0]["summary"]
+
+    # yes_weathers = ["clear-day", "clear-night", "wind", "fog", "cloudy", "partly-cloudy-day", "partly-cloudy-night"]
+
+    no_weathers = ["rain", "snow", "sleet"]
+
+    my_response["final_answer"] = "Yes"
+
+    if no_weathers.include?(my_response["origin_icon"])
+      my_response["final_answer"] = "No"
+    end
+
 
     render json: my_response
     # {

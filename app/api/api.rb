@@ -1,6 +1,5 @@
 module Api
 
-
   def googleMaps(origin, destination, time)
     url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{origin}&destination=#{destination}&departure_time=#{time}&mode=bicycling&key=AIzaSyAQCsSJwynJ67ODIv0ZgGwCffJSChdvB9o"
 
@@ -16,11 +15,11 @@ module Api
   end
 
   def darksky(lat, lng, time)
-    url = "https://api.darksky.net/forecast/668446174c1c15bb92c097fc64d9b4ce/#{lat},#{lng},#{time}?exclude=currently,minutely,daily,flags"
+    url = "https://api.darksky.net/forecast/668446174c1c15bb92c097fc64d9b4ce/#{lat},#{lng}?exclude=currently,minutely,daily,flags"
 
     response = HTTParty.get(url)
     my_response = {}
     response.parsed_response
-  
   end
+  
 end
