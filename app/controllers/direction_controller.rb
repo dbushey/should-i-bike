@@ -43,12 +43,7 @@ class DirectionController < ApplicationController
 
 
     render json: my_response
-    # {
-    #   "origin_icon": "cloudy",
-    #   "origin_summary": "Humid and Overcast",
-    #   "dest_icon": "cloudy",
-    #   "dest_summary": "Humid and Overcast"
-    # }
+    # {origin_icon: "rain", origin_summary: "Rain", dest_icon: "rain", dest_summary: "Rain", final_answer: "No"}
   end
 
 end
