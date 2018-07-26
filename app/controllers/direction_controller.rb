@@ -21,7 +21,7 @@ class DirectionController < ApplicationController
 
     origin_weather = darksky(maps_response["start_location"]["lat"], maps_response["start_location"]["lng"], Time.now().to_i)
 
-    my_response["origin_icon"] = origin_weather["hourly"]["data"][0]["icon"]
+    my_response["origin_icon"] = origin_weather["hourly"]["data"][0]["icon"].upcase.gsub('-', '_')
 
     my_response["origin_summary"] = origin_weather["hourly"]["data"][0]["summary"]
 
