@@ -3,8 +3,8 @@ class DirectionController < ApplicationController
 
   def show
     # byebug
-    maps_response = googleMaps(params[:origin], params[:destination], params[:departure_time])
-    # maps_response is an obj with key duration with text value
+    directions_response = googleDirections(params[:origin], params[:destination], params[:departure_time])
+    # directions_response is an obj with key duration with text value
     # {
     #   "duration": "44 mins",
     #   "start_location": {
@@ -17,15 +17,16 @@ class DirectionController < ApplicationController
     #   }
     # }
 
+
     my_response = {}
 
-    origin_weather = darksky(maps_response["start_location"]["lat"], maps_response["start_location"]["lng"], Time.now().to_i)
+    origin_weather = darksky(directions_response["start_location"]["lat"], directions_response["start_location"]["lng"], Time.now().to_i)
 
     my_response["origin_icon"] = origin_weather["hourly"]["data"][0]["icon"].upcase.gsub('-', '_')
 
     my_response["origin_summary"] = origin_weather["hourly"]["data"][0]["summary"]
 
-    dest_weather = darksky(maps_response["end_location"]["lat"], maps_response["end_location"]["lng"], Time.now().to_i)
+    dest_weather = darksky(directions_response["end_location"]["lat"], directions_response["end_location"]["lng"], Time.now().to_i)
 
     my_response["dest_icon"] = dest_weather["hourly"]["data"][0]["icon"]
 
@@ -40,6 +41,7 @@ class DirectionController < ApplicationController
     if no_weathers.include?(my_response["origin_icon"])
       my_response["final_answer"] = "No"
     end
+
 
 
     render json: my_response
