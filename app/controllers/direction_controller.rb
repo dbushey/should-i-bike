@@ -2,8 +2,8 @@ class DirectionController < ApplicationController
   include Api
 
   def show
-    # byebug
-    directions_response = googleDirections(params[:origin], params[:destination], params[:departure_time])
+
+    directions_response = googleDirections(params[:origin], params[:destination])
     # directions_response is an obj with key duration with text value
     # {
     #   "duration": "44 mins",
@@ -21,18 +21,26 @@ class DirectionController < ApplicationController
 
     my_response = {}
 
-    origin_weather = darksky(directions_response["start_location"]["lat"], directions_response["start_location"]["lng"], Time.now().to_i)
+    origin_weather = darksky(directions_response["start_location"]["lat"], directions_response["start_location"]["lng"], params[:departure_time])
+
+    # byebug
 
     my_response["origin_icon"] = origin_weather["hourly"]["data"][0]["icon"].upcase.gsub('-', '_')
+
 
     my_response["origin_summary"] = origin_weather["hourly"]["summary"]
     # ["data"][0]
 
-    dest_weather = darksky(directions_response["end_location"]["lat"], directions_response["end_location"]["lng"], Time.now().to_i)
+    dest_weather = darksky(directions_response["end_location"]["lat"], directions_response["end_location"]["lng"], params[:departure_time])
+
+
+
 
     my_response["dest_icon"] = dest_weather["hourly"]["data"][0]["icon"]
 
     my_response["dest_summary"] = dest_weather["hourly"]["data"][0]["summary"]
+
+
 
     # yes_weathers = ["clear-day", "clear-night", "wind", "fog", "cloudy", "partly-cloudy-day", "partly-cloudy-night"]
 
@@ -50,7 +58,7 @@ class DirectionController < ApplicationController
     # {origin_icon: "rain", origin_summary: "Rain", dest_icon: "rain", dest_summary: "Rain", final_answer: "No"}
   end
 
-end
+ end
 
 # NOTES TO DEAL WITH TIME LATER
 
