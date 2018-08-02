@@ -7,20 +7,23 @@ module Api
 
     response = HTTParty.get(url)
     my_response = {}
-    # my_response["duration"] = response["routes"][0]["legs"][0] ["duration"]["text"]
+    my_response["duration"] = response["routes"][0]["legs"][0] ["duration"]["text"]
     my_response["start_location"] = response["routes"][0]["legs"][0]["start_location"]
     my_response["end_location"] = response["routes"][0]["legs"][0]["end_location"]
 
     my_response
   end
 
-  def darksky(lat, lng, departure_time)
-    url = "https://api.darksky.net/forecast/668446174c1c15bb92c097fc64d9b4ce/#{lat},#{lng},#{departure_time}?exclude=currently,minutely,daily,flags"
+
+  def darksky(lat, lng, time)
+    url = "https://api.darksky.net/forecast/668446174c1c15bb92c097fc64d9b4ce/#{lat},#{lng},#{time}?exclude=currently,flags"
 
     # byebug
     response = HTTParty.get(url)
     my_response = {}
     response.parsed_response
   end
+
+
 
 end

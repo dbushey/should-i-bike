@@ -25,11 +25,11 @@ class DirectionController < ApplicationController
 
     # byebug
 
-    my_response["origin_icon"] = origin_weather["hourly"]["data"][0]["icon"].upcase.gsub('-', '_')
+    my_response["origin_icon"] = origin_weather["hourly"]["data"][9]["icon"].upcase.gsub('-', '_')
 
 
-    my_response["origin_summary"] = origin_weather["hourly"]["summary"]
-    # ["data"][0]
+    my_response["origin_summary"] = origin_weather["hourly"]["data"][9]["summary"]
+
 
     dest_weather = darksky(directions_response["end_location"]["lat"], directions_response["end_location"]["lng"], params[:departure_time])
 
