@@ -3,8 +3,6 @@
 ## tl;dr
 App that checks weather conditions for bike trips to give personalized answers to the question, “Should I bike today?”
 
-## Screenshot
-
 ## Why?
 
 ## Features
@@ -19,7 +17,11 @@ App that checks weather conditions for bike trips to give personalized answers t
 + React frontend 
 
 ## How to run locally 
-To start both react and the ruby server, from `fr-should-i-bike`, run:
-
+To start ruby server, from `should-i-bike`, run:
+```$rails s```
+To start react, from `fr-should-i-bike`, ruin:
 ```$ yarn start```
+
+## Screenshot
+![Should I bike?](https://i.imgur.com/vcbcqjr.png)
 
