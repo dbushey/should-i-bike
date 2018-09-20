@@ -4,6 +4,7 @@
 App that checks weather conditions for bike trips to give personalized answers to the question, “Should I bike today?”
 
 ## Why?
+To have a straight answer for transportation choice and not waist time checking the weather and route in multiple apps. 
 
 ## Features
 + Enter origin, destination and time of departure to check the weather
